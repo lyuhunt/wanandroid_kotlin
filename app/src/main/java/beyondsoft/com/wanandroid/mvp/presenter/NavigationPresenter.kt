@@ -7,7 +7,7 @@ import beyondsoft.com.wanandroid.api.Transformer
 import beyondsoft.com.wanandroid.base.BasePresenter
 import beyondsoft.com.wanandroid.mvp.contract.NavigationContract
 import beyondsoft.com.wanandroid.mvp.model.bean.HttpResult
-import beyondsoft.com.wanandroid.mvp.model.bean.Navigation
+import beyondsoft.com.wanandroid.mvp.model.bean.NavigationBean
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -23,13 +23,13 @@ class NavigationPresenter : BasePresenter<NavigationContract.View>() , Navigatio
         ApiStore.createApi(ApiService::class.java)
                 ?.getNavigationData()
                 ?.compose(Transformer.switchSchedulers())
-                ?.subscribe(object : Observer<HttpResult<MutableList<Navigation>>> {
+                ?.subscribe(object : Observer<HttpResult<MutableList<NavigationBean>>> {
 
                     override fun onSubscribe(d: Disposable) {
                         mRxManager.add(d)
                     }
 
-                    override fun onNext(t: HttpResult<MutableList<Navigation>>) {
+                    override fun onNext(t: HttpResult<MutableList<NavigationBean>>) {
                         Log.e(TAG, "result = ${t.toString()}" )
                         if (isAttachView()) {
                             if (t.errorCode == 0) {

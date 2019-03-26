@@ -3,6 +3,12 @@
     package="beyondsoft.com.wanandroid">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 获取GSM网络信息状态，如当前的网络连接是否有效 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 允许访问Wi-Fi网络状态信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 允许获取Wi-Fi网络状态改变信息 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +27,7 @@
         </activity>
 
         <activity android:name=".ui.activity.SearchActivity"/>
+        <activity android:name=".ui.activity.ContentActivity"/>
 
     </application>
 

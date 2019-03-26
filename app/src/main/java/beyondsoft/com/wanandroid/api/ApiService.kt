@@ -55,5 +55,5 @@ interface ApiService {
      * 获取导航数据
      */
     @GET("navi/json")
-    fun getNavigationData() : Observable<HttpResult<MutableList<Navigation>>>
+    fun getNavigationData() : Observable<HttpResult<MutableList<NavigationBean>>>
 }

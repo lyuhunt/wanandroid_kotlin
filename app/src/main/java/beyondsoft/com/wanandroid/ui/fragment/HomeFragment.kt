@@ -1,15 +1,18 @@
 package beyondsoft.com.wanandroid.ui.fragment
 
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import beyondsoft.com.wanandroid.R
 import beyondsoft.com.wanandroid.base.BaseMvpFragment
+import beyondsoft.com.wanandroid.constant.Constant
 import beyondsoft.com.wanandroid.mvp.contract.HomeContract
 import beyondsoft.com.wanandroid.mvp.model.bean.Article
 import beyondsoft.com.wanandroid.mvp.model.bean.Banner
 import beyondsoft.com.wanandroid.mvp.presenter.HomePresenter
+import beyondsoft.com.wanandroid.ui.activity.ContentActivity
 import beyondsoft.com.wanandroid.ui.adapter.ArticleAdapter
 import beyondsoft.com.wanandroid.ui.adapter.OnItemViewClickListener
 import beyondsoft.com.wanandroid.utils.LogUtils
@@ -76,7 +79,13 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
             }
         })
         mAdapter?.setOnItemClickListener { view, item, position ->
-            Log.e(TAG, "position = $position item=$item")
+            val data = mArticleData[position]
+            Intent(context, ContentActivity::class.java).run {
+                putExtra(Constant.CONTENT_URL_KEY, data.link)
+                putExtra(Constant.CONTENT_TITLE_KEY, data.title)
+                putExtra(Constant.CONTENT_ID_KEY, data.id)
+                startActivity(this)
+            }
         }
     }
 

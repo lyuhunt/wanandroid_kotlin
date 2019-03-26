@@ -2,7 +2,7 @@ package beyondsoft.com.wanandroid.mvp.contract
 
 import beyondsoft.com.wanandroid.base.IPresenter
 import beyondsoft.com.wanandroid.base.IView
-import beyondsoft.com.wanandroid.mvp.model.bean.Navigation
+import beyondsoft.com.wanandroid.mvp.model.bean.NavigationBean
 
 /**
  * @author zhaixiaofan
@@ -12,7 +12,7 @@ import beyondsoft.com.wanandroid.mvp.model.bean.Navigation
 class NavigationContract {
 
     interface View: IView {
-        fun setNavigation(data : MutableList<Navigation>)
+        fun setNavigation(data : MutableList<NavigationBean>)
     }
 
     interface Presenter : IPresenter<View> {

@@ -12,7 +12,7 @@ data class Banner(val desc: String, val id: Int, val imagePath: String, val isVi
                   val order: Int, val title: String, val type: Int, val url: String)
 
 /**
- * 置顶文章
+ * 文章
  */
 data class Article(val apkLink: String, val author: String, val chapterId: Int, val chapterName: String,
                    var collect: Boolean, val courseId: Int, val desc: String, val envelopePic: String,
@@ -31,20 +31,16 @@ data class ArticleResponseBody(val curPage: Int, var datas: MutableList<Article>
 )
 
 /**
- * 导航数据
- */
-data class Navigation(val cid : Int, val name : String, var articles : MutableList<NavigationResponseBody>)
-data class NavigationResponseBody(val apkLink: String, val author: String,val chapterId: Int,val chapterName: String,
-                                  val collect: Boolean,val courseId: Int,val desc: String,val envelopePic: String,
-                                  val fresh: Boolean,val id: Int,val link: String,val niceDate: String,
-                                  val origin: String,val projectLink: String,val publishTime: Long,val superChapterId: Int,
-                                  val superChapterName: String,val title: String,val type: Int,val userId: Int,
-                                  val visible: Int,val zan: Int,val tags: MutableList<Tag>)
-
-/**
  * 知识体系数据
  */
 data class KnowledgeTreeBody(val children: MutableList<Knowledge>, val courseId: Int, val id: Int, val name: String,
                              val order: Int, val parentChapterId: Int, val visible: Int)
 data class Knowledge(val children: List<Any>, val courseId: Int, val id: Int, val name: String, val order: Int,
                      val parentChapterId: Int, val visible: Int)
+
+/**
+ * 导航数据
+ */
+data class NavigationBean(val cid : Int, val name : String, var articles : MutableList<Article>)
+
+

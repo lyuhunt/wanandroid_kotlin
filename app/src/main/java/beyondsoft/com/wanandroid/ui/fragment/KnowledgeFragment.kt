@@ -7,20 +7,21 @@ import beyondsoft.com.wanandroid.mvp.contract.KnowledgeTreeContract
 import beyondsoft.com.wanandroid.mvp.model.bean.KnowledgeTreeBody
 import beyondsoft.com.wanandroid.mvp.presenter.KnowledgePresenter
 import beyondsoft.com.wanandroid.ui.adapter.KnowledgeAdapter
+import beyondsoft.com.wanandroid.widget.DividerItemDecoration
+import beyondsoft.com.wanandroid.widget.DividerItemDecoration.VERTICAL_LIST
 import com.zhouyou.recyclerview.XRecyclerView
+import com.zhouyou.recyclerview.divider.HorizontalDividerItemDecoration
 
 class KnowledgeFragment : BaseMvpFragment<KnowledgeTreeContract.View, KnowledgeTreeContract.Presenter>(), KnowledgeTreeContract.View {
 
     val TAG = "KnowledgeFragment"
     private var recyclerView: XRecyclerView? = null
     private val mData = mutableListOf<KnowledgeTreeBody>()
-    private val mAdapter: KnowledgeAdapter by lazy { KnowledgeAdapter(context!!) }
 
-    /**
-     * LinearLayoutManager
-     */
-    private val linearLayoutManager: LinearLayoutManager by lazy {
-        LinearLayoutManager(activity)
+    private val mAdapter: KnowledgeAdapter by lazy { KnowledgeAdapter(context!!) }
+    private val linearLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(activity) }
+    private val itemDecoration : DividerItemDecoration by lazy {
+        DividerItemDecoration(VERTICAL_LIST, 15, R.drawable.shape_cursor, 0)
     }
 
     override fun createPresenter(): KnowledgeTreeContract.Presenter = KnowledgePresenter()
@@ -41,6 +42,7 @@ class KnowledgeFragment : BaseMvpFragment<KnowledgeTreeContract.View, KnowledgeT
         recyclerView!!.run {
             adapter = mAdapter
             layoutManager = linearLayoutManager
+            addItemDecoration(itemDecoration)
         }
         recyclerView?.isLoadingMoreEnabled = false
         recyclerView?.isPullRefreshEnabled = false

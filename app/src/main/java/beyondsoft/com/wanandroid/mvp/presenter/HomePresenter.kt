@@ -13,7 +13,7 @@ import beyondsoft.com.wanandroid.mvp.model.bean.HttpResult
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter{
+class HomePresenter : CommonPresenter<HomeContract.View>(), HomeContract.Presenter{
 
     private val TAG = "HomePresenter"
 

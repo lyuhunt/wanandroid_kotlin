@@ -7,10 +7,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatDelegate
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import beyondsoft.com.wanandroid.base.BaseActivity
+import beyondsoft.com.wanandroid.ui.activity.LoginActivity
 import beyondsoft.com.wanandroid.ui.activity.SearchActivity
 import beyondsoft.com.wanandroid.ui.fragment.*
 import beyondsoft.com.wanandroid.utils.SettingUtil
@@ -59,9 +62,13 @@ class MainActivity : BaseActivity() {
                             SettingUtil.setIsNightMode(true)
                             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                         }
-//                        recreate()
+                        //recreate() //官方推荐使用recreate，但recreate有很多坑 闪屏、奔溃等
                         startActivity(Intent(this,MainActivity::class.java))
                         finish()
+                        true
+                    }
+                    R.id.nav_setting -> {
+                        SettingUtil.setColor(this@MainActivity.resources.getColor(R.color.colorPrimary))
                         true
                     }
                     else -> true
@@ -73,6 +80,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+        val isNightMode = SettingUtil.getIsNightMode()
+        Log.e(TAG, "isNightMode = $isNightMode")
     }
 
     override fun initView() {
@@ -88,7 +97,17 @@ class MainActivity : BaseActivity() {
         floating_action_btn.run {
             setOnClickListener(onFABClickListener)
         }
-        nav_view.setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
+        nav_view.run {
+            setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
+            getHeaderView(0).run {
+                val tvName = findViewById<TextView>(R.id.tv_username)
+                setOnClickListener {
+                    Intent(this@MainActivity, LoginActivity::class.java).run {
+                        startActivity(this)
+                    }
+                }
+            }
+        }
     }
 
     override fun getData() {
@@ -102,7 +121,6 @@ class MainActivity : BaseActivity() {
         mProjectFragment = ProjectFragment()
         mFm = this.supportFragmentManager
     }
-
 
     /**
      * DrawerLayout和ActionBarDrawerToggle实现侧滑效果并有图标改变效果

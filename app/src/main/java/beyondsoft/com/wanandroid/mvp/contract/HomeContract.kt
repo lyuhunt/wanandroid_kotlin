@@ -8,13 +8,13 @@ import beyondsoft.com.wanandroid.mvp.model.bean.Banner
 
 interface HomeContract {
 
-    interface Presenter : IPresenter<View> {
+    interface Presenter : CommonContract.Presenter<View> {
         fun getBanner()
         fun getTopArticle()
         fun getArticleList(page : Int)
     }
 
-    interface View : IView {
+    interface View : CommonContract.View {
         fun setBanner(banner: ArrayList<Banner>)
         fun setArticleList(data : MutableList<Article>)
         fun setTopArticleList(data : MutableList<Article>)

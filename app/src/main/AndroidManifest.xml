@@ -28,6 +28,7 @@
 
         <activity android:name=".ui.activity.SearchActivity"/>
         <activity android:name=".ui.activity.ContentActivity"/>
+        <activity android:name=".ui.activity.LoginActivity"/>
 
     </application>
 

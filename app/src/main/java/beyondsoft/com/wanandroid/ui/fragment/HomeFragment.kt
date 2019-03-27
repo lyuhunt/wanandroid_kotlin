@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import beyondsoft.com.wanandroid.R
 import beyondsoft.com.wanandroid.base.BaseMvpFragment
 import beyondsoft.com.wanandroid.constant.Constant
@@ -76,6 +77,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
         mAdapter?.setOnItemViewClickListener(object : OnItemViewClickListener {
             override fun onLikeClick(position: Int) {
                 Log.e(TAG, "收藏  position = $position")
+                mPresenter?.addCollectArticle(position)
             }
         })
         mAdapter?.setOnItemClickListener { view, item, position ->
@@ -184,6 +186,14 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
         isAllLoadFinished()
         mArticleData.addAll(0, data)
         mAdapter?.setListAll(mArticleData)
+    }
+
+    override fun showCollectSuccess(success: Boolean) {
+        Log.e(TAG, "success---------$success")
+        Toast.makeText(mContext, "收藏$success", Toast.LENGTH_LONG).show()
+    }
+
+    override fun showCancelCollectSuccess(success: Boolean) {
     }
 
     /**

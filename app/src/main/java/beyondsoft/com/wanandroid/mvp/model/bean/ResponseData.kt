@@ -21,6 +21,7 @@ data class Article(val apkLink: String, val author: String, val chapterId: Int, 
                    val superChapterName: String, val tags: MutableList<Tag>, val title: String, val type: Int,
                    val userId: Int, val visible: Int, val zan: Int, var top: String
 )
+
 data class Tag(val name: String, val url: String)
 
 /**
@@ -35,12 +36,20 @@ data class ArticleResponseBody(val curPage: Int, var datas: MutableList<Article>
  */
 data class KnowledgeTreeBody(val children: MutableList<Knowledge>, val courseId: Int, val id: Int, val name: String,
                              val order: Int, val parentChapterId: Int, val visible: Int)
+
 data class Knowledge(val children: List<Any>, val courseId: Int, val id: Int, val name: String, val order: Int,
                      val parentChapterId: Int, val visible: Int)
 
 /**
  * 导航数据
  */
-data class NavigationBean(val cid : Int, val name : String, var articles : MutableList<Article>)
+data class NavigationBean(val cid: Int, val name: String, var articles: MutableList<Article>)
+
+/**
+ * 登录数据
+ */
+data class LoginData(val chapterTops: MutableList<String>, val collectIds: MutableList<String>,
+                     val email: String, val icon: String, val id: Int, val password: String,
+                     val token: String, val type: Int, val username: String)
 
 

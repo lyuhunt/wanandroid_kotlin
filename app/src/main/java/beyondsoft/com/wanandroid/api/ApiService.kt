@@ -2,9 +2,7 @@ package beyondsoft.com.wanandroid.api
 
 import beyondsoft.com.wanandroid.mvp.model.bean.*
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 import kotlin.collections.ArrayList
 
 interface ApiService {
@@ -48,12 +46,49 @@ interface ApiService {
     fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HttpResult<ArticleResponseBody>>
 
 
-
-
-
     /**
      * 获取导航数据
      */
     @GET("navi/json")
     fun getNavigationData() : Observable<HttpResult<MutableList<NavigationBean>>>
+
+    /**
+     * 收藏站内文章
+     * http://www.wanandroid.com/lg/collect/1165/json
+     * @param id article id
+     */
+    @POST("lg/collect/{id}/json")
+    fun addCollectArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
+
+    /**
+     * 文章列表中取消收藏文章
+     * http://www.wanandroid.com/lg/uncollect_originId/2333/json
+     * @param id
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    fun cancelCollectArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
+
+    /**
+     * 登录
+     * http://www.wanandroid.com/user/login
+     * @param username
+     * @param password
+     */
+    @POST("user/login")
+    @FormUrlEncoded
+    fun loginWanAndroid(@Field("username") username: String,
+                        @Field("password") password: String): Observable<HttpResult<LoginData>>
+
+    /**
+     * 注册
+     * http://www.wanandroid.com/user/register
+     * @param username
+     * @param password
+     * @param repassword
+     */
+    @POST("user/register")
+    @FormUrlEncoded
+    fun registerWanAndroid(@Field("username") username: String,
+                           @Field("password") password: String,
+                           @Field("repassword") repassword: String): Observable<HttpResult<LoginData>>
 }

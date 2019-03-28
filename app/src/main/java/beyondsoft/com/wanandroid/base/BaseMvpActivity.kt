@@ -5,6 +5,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import beyondsoft.com.wanandroid.R
 
+/**
+ * MVP的基类 包含了四种不同状态 正常布局 加载失败布局 空布局 加载中布局
+ *
+ *      继承BaseMvpActivity的Activity如果需要展示这四种布局
+ *      就必须定义必须为正常布局定义id为normal_view
+ *      且正常布局必须有ViewGroup的父布局
+ */
 abstract class BaseMvpActivity<V : IView, P : IPresenter<V>> : BaseActivity(), IView {
 
     private val TAG = "BaseMvpActivity"
@@ -23,29 +30,25 @@ abstract class BaseMvpActivity<V : IView, P : IPresenter<V>> : BaseActivity(), I
 
     override fun initView() {
         mNormalView = findViewById(R.id.normal_view)
-        if (mNormalView == null) {
-            throw IllegalStateException("There must be no mNormalView in the activity")
+        if (mNormalView != null) {
+            if (mNormalView?.parent!is ViewGroup) {
+                throw IllegalStateException("The parent layout of mNormalView must belong to the viewgroup")
+            }
+            val parent = mNormalView?.parent as ViewGroup
+            View.inflate(this, R.layout.view_empty, parent)
+            View.inflate(this, R.layout.view_error, parent)
+            View.inflate(this, R.layout.view_loading, parent)
+            mLoadingView = parent.findViewById(R.id.loading_group)
+            mErrorView = parent.findViewById(R.id.error_group)
+            mEmptyView = parent.findViewById(R.id.empty_group)
+            // 重新加载
+            parent.findViewById<TextView>(R.id.tv_reload).setOnClickListener {
+                reload()
+            }
+            mEmptyView?.visibility = View.GONE
+            mErrorView?.visibility = View.GONE
+            mLoadingView?.visibility = View.GONE
         }
-        if (mNormalView?.parent!is ViewGroup) {
-            throw IllegalStateException("The parent layout of mNormalView must belong to the viewgroup")
-        }
-        val parent = mNormalView?.parent as ViewGroup
-        View.inflate(this, R.layout.view_empty, parent)
-        View.inflate(this, R.layout.view_error, parent)
-        View.inflate(this, R.layout.view_loading, parent)
-
-        mLoadingView = parent.findViewById(R.id.loading_group)
-        mErrorView = parent.findViewById(R.id.error_group)
-        mEmptyView = parent.findViewById(R.id.empty_group)
-
-        // 重新加载
-        parent.findViewById<TextView>(R.id.tv_reload).setOnClickListener {
-            reload()
-        }
-
-        mEmptyView?.visibility = View.GONE
-        mErrorView?.visibility = View.GONE
-        mLoadingView?.visibility = View.GONE
 
         mPresenter = createPresenter()
         if (mPresenter != null) mPresenter?.attachView(this as V)

@@ -3,22 +3,20 @@ package com.zhouyou.recyclerview.refresh;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
- * <p>描述：定制了自定义头部动画基类</p>
- * <p>
- * 作者： zhouyou<br>
- * 日期： 2016/12/14 9:47<br>
- * 版本： v2.0<br>
+ * 自定义动画效果的下拉刷新的基类
  */
 public abstract class BaseRefreshHeader extends LinearLayout implements IRefreshHeader {
     private LinearLayout mContainer;
     private int mState = STATE_NORMAL;
     protected int mMeasuredHeight;
+    private static final String TAG = "BaseRefreshHeader";
 
     public BaseRefreshHeader(Context context) {
         super(context);
@@ -41,10 +39,13 @@ public abstract class BaseRefreshHeader extends LinearLayout implements IRefresh
         lp.setMargins(0, 0, 0, 0);
         this.setLayoutParams(lp);
         this.setPadding(0, 0, 0, 0);
+
         View view = getView();
         if (view == null) {
             throw new NullPointerException("getView() is null!!!");
         }
+        view.setPadding(0, 50, 0, 50);
+
         mContainer.addView(view);
         mContainer.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
 

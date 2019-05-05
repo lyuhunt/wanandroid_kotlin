@@ -6,6 +6,9 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatDelegate
 import android.util.Log
+import beyondsoft.com.wanandroid.mvp.contract.LoginContract
+import beyondsoft.com.wanandroid.mvp.model.bean.LoginData
+import beyondsoft.com.wanandroid.mvp.presenter.LoginPresenter
 import beyondsoft.com.wanandroid.utils.SettingUtil
 import java.util.*
 import kotlin.properties.Delegates
@@ -14,7 +17,7 @@ import kotlin.properties.Delegates
  * @author zhaixiaofan
  * @date 2019/3/23 3:15 PM
  */
-class App : Application() {
+class App : Application(){
 
     companion object {
         private val TAG = "App"
@@ -23,7 +26,6 @@ class App : Application() {
             private set
 
         lateinit var instance: Application
-
     }
 
 

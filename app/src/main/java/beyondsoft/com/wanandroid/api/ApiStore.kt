@@ -1,6 +1,8 @@
 package beyondsoft.com.wanandroid.api
 
 import beyondsoft.com.wanandroid.BuildConfig
+import beyondsoft.com.wanandroid.api.converter.CustomConverterFactory
+import beyondsoft.com.wanandroid.api.interceptor.CommonParamsInterceptor
 import beyondsoft.com.wanandroid.constant.Constant
 import beyondsoft.com.wanandroid.log.httplog.HttpLoggingInterceptorM
 import com.google.gson.GsonBuilder
@@ -29,7 +31,7 @@ object ApiStore {
                     val gs = GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss").create()
                     retrofit = Retrofit.Builder()
                             .baseUrl(Constant.URL_BASE_TEST)
-                            .addConverterFactory(GsonConverterFactory.create(gs))
+                            .addConverterFactory(CustomConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .client(getOkHttpClient())
                             .build()
@@ -52,6 +54,7 @@ object ApiStore {
         }
 
         builder.run {
+            addInterceptor(CommonParamsInterceptor())
             addInterceptor(httpLoggingInterceptor)
             connectTimeout(Constant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             readTimeout(Constant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)

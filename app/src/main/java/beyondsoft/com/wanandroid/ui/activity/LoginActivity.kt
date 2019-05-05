@@ -20,6 +20,7 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginContract.Presente
     }
 
     override fun getData() {
+        mPresenter?.login("zhaibufan", "8hkh98jkk")
     }
 
     override fun initData() {

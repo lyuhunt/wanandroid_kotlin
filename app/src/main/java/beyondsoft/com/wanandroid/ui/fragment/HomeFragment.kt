@@ -17,6 +17,9 @@ import beyondsoft.com.wanandroid.ui.activity.ContentActivity
 import beyondsoft.com.wanandroid.ui.adapter.ArticleAdapter
 import beyondsoft.com.wanandroid.ui.adapter.OnItemViewClickListener
 import beyondsoft.com.wanandroid.utils.LogUtils
+import beyondsoft.com.wanandroid.widget.CustomMoreFooter
+import beyondsoft.com.wanandroid.widget.CustomRefreshHeader
+import beyondsoft.com.wanandroid.widget.CustomRefreshView
 import com.bumptech.glide.Glide
 import com.zhouyou.recyclerview.XRecyclerView
 import com.zhouyou.recyclerview.refresh.ProgressStyle
@@ -58,14 +61,17 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
         mRecyclerView?.adapter = mAdapter
 
         addHeader()
-        mRecyclerView?.setRefreshProgressStyle(ProgressStyle.LineScaleParty)
-        mRecyclerView?.setLoadingMoreProgressStyle(ProgressStyle.LineScaleParty)
+//        mRecyclerView?.setRefreshProgressStyle(ProgressStyle.LineScaleParty)
+//        mRecyclerView?.setLoadingMoreProgressStyle(ProgressStyle.LineScaleParty)
+        mRecyclerView?.setRefreshHeader(CustomRefreshHeader(mContext!!))
+        mRecyclerView?.setLoadingMoreFooter(CustomMoreFooter(mContext))
+
 
         mRecyclerView?.isLoadingMoreEnabled = true
         mRecyclerView?.isPullRefreshEnabled = true
         mRecyclerView?.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onLoadMore() {
-                loadMore()
+//                loadMore()
             }
 
             override fun onRefresh() {

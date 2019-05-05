@@ -19,11 +19,11 @@ import com.zhouyou.recyclerview.progressindicator.AVLoadingIndicatorView;
 import com.zhouyou.recyclerviewsdk.R;
 
 import java.util.Date;
+
 /**
- * <p>描述：库中默认实现的下拉刷新</p>
- * 作者： zhouyou<br>
- * 日期： 2016/5/2 17:23 <br>
- * 版本： v1.0<br>
+ * 默认使用的下拉刷新的头布局
+ *
+ *      可通过更改listview_header布局的height来改变头布局的高度
  */
 public class ArrowRefreshHeader extends LinearLayout implements IRefreshHeader {
 

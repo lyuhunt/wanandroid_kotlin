@@ -12,10 +12,10 @@ import com.zhouyou.recyclerview.progressindicator.AVLoadingIndicatorView;
 import com.zhouyou.recyclerviewsdk.R;
 
 /**
- * <p>描述：库中默认的加载更多实现</p>
- * 作者： zhouyou<br>
- * 日期： 2016/5/2 17:23 <br>
- * 版本： v1.0<br>
+ * 默认使用的加载更多的脚部局
+ *
+ *      该加载更多的脚部局没有定义xml文件，但可通过改变BaseMoreFooter的initView中的topMargin和bottomMargin
+ *      改变脚部局高度
  */
 public class LoadingMoreFooter extends BaseMoreFooter {
     private SimpleViewSwitcher progressCon;

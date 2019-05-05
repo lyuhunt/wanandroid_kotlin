@@ -33,8 +33,8 @@ public class BaseMoreFooter extends LinearLayout implements IMoreFooter {
         setGravity(Gravity.CENTER);
         RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.topMargin = 30;
-        params.bottomMargin = 30;
+        params.topMargin = 60;
+        params.bottomMargin = 60;
         setLayoutParams(params);
     }
 

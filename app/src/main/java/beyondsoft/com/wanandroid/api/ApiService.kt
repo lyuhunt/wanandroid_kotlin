@@ -2,6 +2,7 @@ package beyondsoft.com.wanandroid.api
 
 import beyondsoft.com.wanandroid.mvp.model.bean.*
 import io.reactivex.Observable
+import okhttp3.RequestBody
 import retrofit2.http.*
 import kotlin.collections.ArrayList
 
@@ -78,6 +79,14 @@ interface ApiService {
     @FormUrlEncoded
     fun loginWanAndroid(@Field("username") username: String,
                         @Field("password") password: String): Observable<HttpResult<LoginData>>
+
+    @POST("user/login")
+    fun loginWanAndroid(@Body body : RequestBody) : Observable<String>
+
+
+    @POST("user/login")
+    fun loginWanAndroid(@Body body : String) : Observable<HttpResult<LoginData>>
+
 
     /**
      * 注册

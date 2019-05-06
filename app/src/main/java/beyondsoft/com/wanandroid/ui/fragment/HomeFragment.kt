@@ -71,7 +71,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
         mRecyclerView?.isPullRefreshEnabled = true
         mRecyclerView?.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onLoadMore() {
-//                loadMore()
+                loadMore()
             }
 
             override fun onRefresh() {
